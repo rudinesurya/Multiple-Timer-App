@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Multiple_Timer_App.Views.AddTimerPage"
+             Title="Add Timer">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Entry Placeholder="Title" 
+                   Text="{Binding Title}" />
+
+            <TimePicker Time="{Binding SelectedDuration}" />
+
+            <Editor Placeholder="Reminder Note"
+                    HeightRequest="100"
+                    AutoSize="TextChanges"
+                    Text="{Binding ReminderNote}" />
+
+            <Button Text="Add Timer"
+                    Command="{Binding AddTimerCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

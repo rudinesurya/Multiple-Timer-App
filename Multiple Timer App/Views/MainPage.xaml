@@ -1,0 +1,44 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Multiple_Timer_App.ViewModels"
+             x:Class="Multiple_Timer_App.Views.MainPage"
+             Title="Countdown Timers">
+    <ContentPage.Content>
+        <StackLayout>
+            <CollectionView x:Name="TimersCollectionView"
+                      ItemsSource="{Binding Timers}"
+                      SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <!-- Using the DeleteTimerCommand from the ViewModel -->
+                                    <SwipeItem Text="Delete" 
+                                         BackgroundColor="Red"
+                                         Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.DeleteTimerCommand}"
+                                         CommandParameter="{Binding .}" />
+                                    </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="10" ColumnDefinitions="*,Auto">
+                                <!-- Add a tap gesture recognizer so that tapping fires the navigation command -->
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                      Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.NavigateToDetailCommand}"
+                      CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <Label Text="{Binding Title}" FontSize="18" VerticalOptions="Center" />
+                                <Label Text="{Binding RemainingTime}" 
+                       FontSize="14" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="End" 
+                       Grid.Column="1" />
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Add Timer" Command="{Binding AddTimerCommand}" Margin="10"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
