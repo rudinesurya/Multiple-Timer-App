@@ -1,18 +1,43 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Multiple_Timer_App.ViewModels"
              x:Class="Multiple_Timer_App.Views.TimerDetailPage"
              Title="{Binding Timer.Title}">
     <ContentPage.Content>
-        <StackLayout Padding="20" Spacing="20">
-            <Label Text="{Binding Timer.Title}" FontSize="24" HorizontalOptions="Center" />
-            <Label Text="{Binding Timer.RemainingTime}" FontSize="48" HorizontalOptions="Center" />
+        <StackLayout Padding="20"
+                     Spacing="20">
+            <Label Text="{Binding Timer.Title}"
+                   FontSize="24"
+                   HorizontalOptions="Center" />
+            <Label Text="{Binding Timer.RemainingTime}"
+                   FontSize="48"
+                   HorizontalOptions="Center" />
             <Editor Text="{Binding Timer.ReminderNote}"
-              Placeholder="Enter a custom reminder note"
-              HeightRequest="100" />
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
-                <Button Text="{Binding PauseResumeButtonText}" Command="{Binding TogglePauseCommand}" />
-                <Button Text="Restart" Command="{Binding RestartTimerCommand}" />
+                    Placeholder="Enter a custom reminder note"
+                    HeightRequest="100" />
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         Spacing="20">
+                <Button Command="{Binding TogglePauseCommand}">
+                    <Button.Triggers>
+                        <!-- Show Pause icon if running -->
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding Timer.IsRunning}"
+                                     Value="true">
+                            <Setter Property="Text"
+                                    Value="⏸️" />
+                        </DataTrigger>
+                        <!-- Show Play icon if paused -->
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding Timer.IsRunning}"
+                                     Value="false">
+                            <Setter Property="Text"
+                                    Value="▶️" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Text="🔄"
+                        Command="{Binding RestartTimerCommand}" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

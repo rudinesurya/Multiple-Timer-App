@@ -23,11 +23,4 @@ public partial class CountdownTimer : ObservableObject
 
     [ObservableProperty]
     string reminderNote;
-
-    public string PauseResumeIcon => IsRunning ? "⏸️" : "▶️";
-
-    partial void OnIsRunningChanged(bool oldValue, bool newValue)
-    {
-        OnPropertyChanged(nameof(PauseResumeIcon));
-    }
 }

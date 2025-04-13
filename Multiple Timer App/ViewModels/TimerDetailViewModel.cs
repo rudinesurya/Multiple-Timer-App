@@ -12,9 +12,6 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty]
     CountdownTimer timer;
 
-    [ObservableProperty]
-    private string pauseResumeButtonText = "Pause";
-
     public TimerDetailViewModel(ITimerService timerService)
     {
         this.timerService = timerService;
@@ -36,11 +33,9 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
             if (Timer.IsRunning)
             {
                 timerService.StopTimer(Timer);
-                PauseResumeButtonText = "Resume";
             } else
             {
                 timerService.StartTimer(Timer);
-                PauseResumeButtonText = "Pause";
             }
         }
     }
@@ -51,7 +46,6 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
         if (Timer != null)
         {
             timerService.RestartTimer(Timer);
-            PauseResumeButtonText = "Pause";
         }
     }
 }

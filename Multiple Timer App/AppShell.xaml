@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="Multiple_Timer_App.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Multiple_Timer_App"
-    xmlns:views="clr-namespace:Multiple_Timer_App.Views"
-    Shell.FlyoutBehavior="Flyout"
-    Title="Multiple_Timer_App">
+<Shell x:Class="Multiple_Timer_App.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:Multiple_Timer_App"
+       xmlns:views="clr-namespace:Multiple_Timer_App.Views"
+       Shell.FlyoutBehavior="Flyout"
+       Title="Multiple_Timer_App">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage" />
+    <ShellContent Title="Home"
+                  ContentTemplate="{DataTemplate views:MainPage}"
+                  Route="MainPage" />
 
 </Shell>
