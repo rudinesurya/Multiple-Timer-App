@@ -20,7 +20,7 @@
                                          CommandParameter="{Binding .}" />
                                     </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid Padding="10" ColumnDefinitions="*,Auto">
+                            <Grid Padding="10" ColumnDefinitions="*,Auto,Auto,Auto">
                                 <!-- Add a tap gesture recognizer so that tapping fires the navigation command -->
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -28,11 +28,27 @@
                       CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
                                 <Label Text="{Binding Title}" FontSize="18" VerticalOptions="Center" />
-                                <Label Text="{Binding RemainingTime}" 
-                       FontSize="14" 
-                       VerticalOptions="Center" 
-                       HorizontalOptions="End" 
-                       Grid.Column="1" />
+                                <Label Text="{Binding RemainingTime}"
+           FontSize="14"
+           VerticalOptions="Center"
+           HorizontalOptions="End"
+           Grid.Column="1" />
+
+                                <Button Text="{Binding PauseResumeIcon}"
+            Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.TogglePauseCommand}"
+                                        CommandParameter="{Binding .}"
+            Grid.Column="2"
+            Padding="5"
+            FontSize="14"
+            BackgroundColor="Transparent" />
+
+                                <Button Text="🔄"
+            Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.RestartTimerCommand}"
+                                        CommandParameter="{Binding .}"
+            Grid.Column="3"
+            Padding="5"
+            FontSize="14"
+            BackgroundColor="Transparent" />
                             </Grid>
                         </SwipeView>
                     </DataTemplate>

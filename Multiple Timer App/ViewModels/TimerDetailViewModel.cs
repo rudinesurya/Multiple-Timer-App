@@ -7,24 +7,24 @@ namespace Multiple_Timer_App.ViewModels;
 
 public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
 {
-    private readonly ITimerService _timerService;
+    private readonly ITimerService timerService;
 
     [ObservableProperty]
     CountdownTimer timer;
 
     [ObservableProperty]
-    private string pauseButtonText = "Pause";
+    private string pauseResumeButtonText = "Pause";
 
     public TimerDetailViewModel(ITimerService timerService)
     {
-        _timerService = timerService;
+        this.timerService = timerService;
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.TryGetValue("timerId", out var idObj) && idObj is string id)
         {
-            Timer = _timerService.Timers.FirstOrDefault(t => t.Id == id);
+            Timer = timerService.Timers.FirstOrDefault(t => t.Id == id);
         }
     }
 
@@ -35,12 +35,12 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
         {
             if (Timer.IsRunning)
             {
-                _timerService.StopTimer(Timer);
-                PauseButtonText = "Resume";
+                timerService.StopTimer(Timer);
+                PauseResumeButtonText = "Resume";
             } else
             {
-                _timerService.StartTimer(Timer);
-                PauseButtonText = "Pause";
+                timerService.StartTimer(Timer);
+                PauseResumeButtonText = "Pause";
             }
         }
     }
@@ -50,8 +50,8 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
     {
         if (Timer != null)
         {
-            _timerService.RestartTimer(Timer);
-            PauseButtonText = "Pause";
+            timerService.RestartTimer(Timer);
+            PauseResumeButtonText = "Pause";
         }
     }
 }

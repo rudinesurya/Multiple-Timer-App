@@ -11,7 +11,7 @@
               Placeholder="Enter a custom reminder note"
               HeightRequest="100" />
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
-                <Button Text="{Binding PauseButtonText}" Command="{Binding TogglePauseCommand}" />
+                <Button Text="{Binding PauseResumeButtonText}" Command="{Binding TogglePauseCommand}" />
                 <Button Text="Restart" Command="{Binding RestartTimerCommand}" />
             </StackLayout>
         </StackLayout>

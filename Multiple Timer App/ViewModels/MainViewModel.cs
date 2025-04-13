@@ -9,14 +9,14 @@ namespace Multiple_Timer_App.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
-    private readonly ITimerService _timerService;
+    private readonly ITimerService timerService;
 
     // Collection of countdown timers
-    public ObservableCollection<CountdownTimer> Timers => _timerService.Timers;
+    public ObservableCollection<CountdownTimer> Timers => timerService.Timers;
 
     public MainViewModel(ITimerService timerService)
     {
-        _timerService = timerService;
+        this.timerService = timerService;
     }
 
     // Navigate to AddTimerPage
@@ -30,7 +30,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     void DeleteTimer(CountdownTimer timer)
     {
-        _timerService.RemoveTimer(timer);
+        timerService.RemoveTimer(timer);
     }
 
     [RelayCommand]
@@ -39,6 +39,31 @@ public partial class MainViewModel : ObservableObject
         if (timer != null)
         {
             await AppShell.Current.GoToAsync($"{nameof(TimerDetailPage)}?timerId={timer.Id}");
+        }
+    }
+
+    [RelayCommand]
+    void TogglePause(CountdownTimer timer)
+    {
+        if (timer != null)
+        {
+            if (timer.IsRunning)
+            {
+                timerService.StopTimer(timer);
+            }
+            else
+            {
+                timerService.StartTimer(timer);
+            }
+        }
+    }
+
+    [RelayCommand]
+    void RestartTimer(CountdownTimer timer)
+    {
+        if (timer != null)
+        {
+            timerService.RestartTimer(timer);
         }
     }
 }

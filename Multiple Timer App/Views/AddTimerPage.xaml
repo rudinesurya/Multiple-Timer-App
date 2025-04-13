@@ -9,7 +9,30 @@
             <Entry Placeholder="Title" 
                    Text="{Binding Title}" />
 
-            <TimePicker Time="{Binding SelectedDuration}" />
+            <Label Text="Select Duration" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <VerticalStackLayout>
+                    <Label Text="Hours" HorizontalOptions="Center" />
+                    <Picker ItemsSource="{Binding HourOptions}"
+                        SelectedItem="{Binding SelectedHour, Mode=TwoWay}"
+                         />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Minutes" HorizontalOptions="Center" />
+                    <Picker ItemsSource="{Binding MinuteOptions}"
+                        SelectedItem="{Binding SelectedMinute, Mode=TwoWay}"
+                         />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Seconds" HorizontalOptions="Center" />
+                    <Picker ItemsSource="{Binding SecondOptions}"
+                        SelectedItem="{Binding SelectedSecond, Mode=TwoWay}"
+                        />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
 
             <Editor Placeholder="Reminder Note"
                     HeightRequest="100"
