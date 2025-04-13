@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Multiple_Timer_App.Views.Controls.DurationPickerView">
+    <HorizontalStackLayout HorizontalOptions="Center">
+        <VerticalStackLayout>
+            <Label Text="Hours"
+                   HorizontalOptions="Center" />
+            <Picker ItemsSource="{Binding HourOptions}"
+                    SelectedItem="{Binding SelectedHour, Mode=TwoWay}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label Text="Minutes"
+                   HorizontalOptions="Center" />
+            <Picker ItemsSource="{Binding MinuteOptions}"
+                    SelectedItem="{Binding SelectedMinute, Mode=TwoWay}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label Text="Seconds"
+                   HorizontalOptions="Center" />
+            <Picker ItemsSource="{Binding SecondOptions}"
+                    SelectedItem="{Binding SelectedSecond, Mode=TwoWay}" />
+        </VerticalStackLayout>
+    </HorizontalStackLayout>
+</ContentView>

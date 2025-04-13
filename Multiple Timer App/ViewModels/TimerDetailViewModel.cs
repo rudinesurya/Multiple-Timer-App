@@ -12,6 +12,12 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty]
     CountdownTimer timer;
 
+    [ObservableProperty]
+    string editedTitle;
+
+    [ObservableProperty]
+    string editedReminderNote;
+
     public TimerDetailViewModel(ITimerService timerService)
     {
         this.timerService = timerService;
@@ -22,6 +28,12 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
         if (query.TryGetValue("timerId", out var idObj) && idObj is string id)
         {
             Timer = timerService.Timers.FirstOrDefault(t => t.Id == id);
+
+            if (Timer != null)
+            {
+                EditedTitle = Timer.Title;
+                EditedReminderNote = Timer.ReminderNote;
+            }
         }
     }
 
@@ -33,7 +45,8 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
             if (Timer.IsRunning)
             {
                 timerService.StopTimer(Timer);
-            } else
+            }
+            else
             {
                 timerService.StartTimer(Timer);
             }
@@ -46,6 +59,16 @@ public partial class TimerDetailViewModel : ObservableObject, IQueryAttributable
         if (Timer != null)
         {
             timerService.RestartTimer(Timer);
+        }
+    }
+
+    [RelayCommand]
+    void SaveChanges()
+    {
+        if (Timer != null)
+        {
+            Timer.Title = EditedTitle?.Trim();
+            Timer.ReminderNote = EditedReminderNote?.Trim();
         }
     }
 }

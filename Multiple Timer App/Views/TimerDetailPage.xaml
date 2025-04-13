@@ -6,13 +6,15 @@
     <ContentPage.Content>
         <StackLayout Padding="20"
                      Spacing="20">
-            <Label Text="{Binding Timer.Title}"
+            <!-- Editable Title -->
+            <Entry Text="{Binding EditedTitle}"
                    FontSize="24"
+                   Placeholder="Enter timer title"
                    HorizontalOptions="Center" />
             <Label Text="{Binding Timer.RemainingTime}"
                    FontSize="48"
                    HorizontalOptions="Center" />
-            <Editor Text="{Binding Timer.ReminderNote}"
+            <Editor Text="{Binding EditedReminderNote}"
                     Placeholder="Enter a custom reminder note"
                     HeightRequest="100" />
             <StackLayout Orientation="Horizontal"
@@ -38,6 +40,9 @@
                 </Button>
                 <Button Text="🔄"
                         Command="{Binding RestartTimerCommand}" />
+
+                <Button Text="💾"
+                        Command="{Binding SaveChangesCommand}" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
