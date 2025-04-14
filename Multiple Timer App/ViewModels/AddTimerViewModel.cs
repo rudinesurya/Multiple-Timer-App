@@ -59,6 +59,6 @@ public partial class AddTimerViewModel : ObservableObject
         timerService.AddTimer(timer);
         timerService.StartTimer(timer);
 
-        await AppShell.Current.GoToAsync("///MainPage");
+        await Shell.Current.GoToAsync(".."); // ✅ Go back one page
     }
 }

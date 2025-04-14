@@ -3,6 +3,13 @@
              xmlns:viewModels="clr-namespace:Multiple_Timer_App.ViewModels"
              x:Class="Multiple_Timer_App.Views.MainPage"
              Title="Countdown Timers">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     IconImageSource="add.png"
+                     Order="Primary"
+                     Priority="0"
+                     Command="{Binding AddTimerCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <CollectionView x:Name="TimersCollectionView"
@@ -10,70 +17,95 @@
                             SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItems Mode="Execute">
-                                    <!-- Using the DeleteTimerCommand from the ViewModel -->
-                                    <SwipeItem Text="Delete"
-                                               BackgroundColor="Red"
-                                               Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.DeleteTimerCommand}"
-                                               CommandParameter="{Binding .}" />
-                                </SwipeItems>
-                            </SwipeView.RightItems>
+                        <Frame CornerRadius="12"
+                               Padding="10"
+                               Margin="5"
+                               BackgroundColor="White"
+                               HasShadow="True">
 
-                            <Grid Padding="10"
-                                  ColumnDefinitions="*,Auto,Auto,Auto">
-                                <!-- Add a tap gesture recognizer so that tapping fires the navigation command -->
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.NavigateToDetailCommand}"
-                                                          CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>
-                                <Label Text="{Binding Title}"
+                            <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto"
+                                  RowDefinitions="Auto,Auto"
+                                  ColumnSpacing="10"
+                                  VerticalOptions="Center">
+
+                                <!-- Title -->
+                                <Label Grid.Column="0"
+                                       Grid.Row="0"
+                                       Grid.ColumnSpan="5"
+                                       Text="{Binding Title}"
                                        FontSize="18"
-                                       VerticalOptions="Center" />
-                                <Label Text="{Binding RemainingTime}"
-                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="Black" />
+
+                                <!-- Remaining Time -->
+                                <Label Grid.Column="0"
+                                       Grid.Row="1"
+                                       Text="{Binding RemainingTime}"
+                                       FontSize="40"
+                                       TextColor="DarkSlateGray"
                                        VerticalOptions="Center"
-                                       HorizontalOptions="End"
-                                       Grid.Column="1" />
-                                <Button Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.TogglePauseCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Grid.Column="2"
-                                        Padding="5"
-                                        FontSize="14"
-                                        BackgroundColor="Transparent">
-                                    <Button.Triggers>
-                                        <!-- Show Pause Icon (⏸️) when the timer is running -->
-                                        <DataTrigger TargetType="Button"
+                                       HorizontalOptions="Start" />
+
+                                <!-- Delete Button -->
+                                <ImageButton Grid.Column="1"
+                                             Grid.Row="1"
+                                             Source="delete.png"
+                                             Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.DeleteTimerCommand}"
+                                             CommandParameter="{Binding .}"
+                                             BackgroundColor="Transparent"
+                                             HeightRequest="36"
+                                             WidthRequest="36"
+                                             Padding="0" />
+
+                                <!-- Toggle Pause/Play Button -->
+                                <ImageButton Grid.Column="2"
+                                             Grid.Row="1"
+                                             BackgroundColor="Transparent"
+                                             HeightRequest="36"
+                                             WidthRequest="36"
+                                             Padding="0"
+                                             Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.TogglePauseCommand}"
+                                             CommandParameter="{Binding .}">
+                                    <ImageButton.Triggers>
+                                        <DataTrigger TargetType="ImageButton"
                                                      Binding="{Binding IsRunning}"
                                                      Value="true">
-                                            <Setter Property="Text"
-                                                    Value="⏸️" />
+                                            <Setter Property="Source"
+                                                    Value="pause.png" />
                                         </DataTrigger>
-                                        <!-- Show Play Icon (▶️) when the timer is not running -->
-                                        <DataTrigger TargetType="Button"
+                                        <DataTrigger TargetType="ImageButton"
                                                      Binding="{Binding IsRunning}"
                                                      Value="false">
-                                            <Setter Property="Text"
-                                                    Value="▶️" />
+                                            <Setter Property="Source"
+                                                    Value="play.png" />
                                         </DataTrigger>
-                                    </Button.Triggers>
-                                </Button>
-                                <Button Text="🔄"
-                                        Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.RestartTimerCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Grid.Column="3"
-                                        Padding="5"
-                                        FontSize="14"
-                                        BackgroundColor="Transparent" />
+                                    </ImageButton.Triggers>
+                                </ImageButton>
+
+                                <!-- Restart Button -->
+                                <ImageButton Grid.Column="3"
+                                             Grid.Row="1"
+                                             Source="restart.png"
+                                             Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.RestartTimerCommand}"
+                                             CommandParameter="{Binding .}"
+                                             BackgroundColor="Transparent"
+                                             HeightRequest="36"
+                                             WidthRequest="36"
+                                             Padding="0" />
                             </Grid>
-                        </SwipeView>
+
+                            <!-- Entire card tap navigation (EXCLUDE button areas) -->
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference TimersCollectionView}, Path=BindingContext.NavigateToDetailCommand}"
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+
+                        </Frame>
                     </DataTemplate>
+
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Button Text="Add Timer"
-                    Command="{Binding AddTimerCommand}"
-                    Margin="10" />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

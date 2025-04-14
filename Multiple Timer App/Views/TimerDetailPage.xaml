@@ -27,22 +27,23 @@
                                      Binding="{Binding Timer.IsRunning}"
                                      Value="true">
                             <Setter Property="Text"
-                                    Value="⏸️" />
+                                    Value="Pause" />
                         </DataTrigger>
                         <!-- Show Play icon if paused -->
                         <DataTrigger TargetType="Button"
                                      Binding="{Binding Timer.IsRunning}"
                                      Value="false">
                             <Setter Property="Text"
-                                    Value="▶️" />
+                                    Value="Play" />
                         </DataTrigger>
                     </Button.Triggers>
                 </Button>
-                <Button Text="🔄"
+
+                <Button Text="Restart"
                         Command="{Binding RestartTimerCommand}" />
 
-                <Button Text="💾"
-                        Command="{Binding SaveChangesCommand}" />
+                <Button Text="Save"
+                            Command="{Binding SaveChangesCommand}" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

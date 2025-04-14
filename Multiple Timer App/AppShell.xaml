@@ -4,11 +4,10 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Multiple_Timer_App"
        xmlns:views="clr-namespace:Multiple_Timer_App.Views"
-       Shell.FlyoutBehavior="Flyout"
+       Shell.FlyoutBehavior="Disabled"
        Title="Multiple_Timer_App">
 
     <ShellContent Title="Home"
-                  ContentTemplate="{DataTemplate views:MainPage}"
-                  Route="MainPage" />
+                  ContentTemplate="{DataTemplate views:MainPage}" />
 
 </Shell>
