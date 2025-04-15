@@ -67,8 +67,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\TimerDetailPage.xaml.cs">
-	    <DependentUpon>TimerDetailPage.xaml</DependentUpon>
+	  <Compile Update="Views\EditAndRestartDurationPage.xaml.cs">
+	    <DependentUpon>EditAndRestartDurationPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -77,6 +77,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\DurationPickerView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EditAndRestartDurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TimerDetailPage.xaml">

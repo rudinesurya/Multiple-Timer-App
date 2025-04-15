@@ -73,6 +73,5 @@ public partial class TimerService : ObservableObject, ITimerService
     {
         StopTimer(timer);
         timer.RemainingTime = timer.Duration; // or your default/original time
-        StartTimer(timer);
     }
 }

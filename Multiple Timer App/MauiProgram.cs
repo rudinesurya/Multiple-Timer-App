@@ -29,6 +29,9 @@ public static class MauiProgram
         builder.Services.AddTransient<TimerDetailViewModel>();
         builder.Services.AddTransient<TimerDetailPage>();
 
+        builder.Services.AddTransient<EditAndRestartDurationViewModel>();
+        builder.Services.AddTransient<EditAndRestartDurationPage>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

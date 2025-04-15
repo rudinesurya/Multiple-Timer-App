@@ -5,6 +5,7 @@
              x:Class="Multiple_Timer_App.App">
     <Application.Resources>
         <ResourceDictionary>
+            <local:BoolToTextConverter x:Key="BoolToTextConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

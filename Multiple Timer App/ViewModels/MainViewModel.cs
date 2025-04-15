@@ -38,7 +38,10 @@ public partial class MainViewModel : ObservableObject
     {
         if (timer != null)
         {
-            await AppShell.Current.GoToAsync($"{nameof(TimerDetailPage)}?timerId={timer.Id}");
+            await Shell.Current.GoToAsync(nameof(TimerDetailPage), new Dictionary<string, object>
+            {
+                { "timerId", timer.Id }
+            });
         }
     }
 

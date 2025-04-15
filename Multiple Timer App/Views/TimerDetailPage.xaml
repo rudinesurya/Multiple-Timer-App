@@ -1,50 +1,69 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:Multiple_Timer_App.ViewModels"
              x:Class="Multiple_Timer_App.Views.TimerDetailPage"
-             Title="{Binding Timer.Title}">
-    <ContentPage.Content>
-        <StackLayout Padding="20"
-                     Spacing="20">
-            <!-- Editable Title -->
+             Title="Edit Timer">
+    <ScrollView Padding="20">
+        <StackLayout Spacing="20">
+            <!-- Title Input -->
             <Entry Text="{Binding EditedTitle}"
                    FontSize="24"
                    Placeholder="Enter timer title"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="FillAndExpand" />
+
+            <!-- Remaining Time Display -->
             <Label Text="{Binding Timer.RemainingTime}"
                    FontSize="48"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"
+                   VerticalOptions="CenterAndExpand" />
+
+            <!-- Duration Label with Click Prompt -->
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Spacing="5">
+                <!-- Duration Label -->
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="24"
+                       TextColor="Blue">
+                    <Label.Text>
+                        <Binding Path="EditedDuration">
+                            <Binding.StringFormat>
+                                {0}
+                            </Binding.StringFormat>
+                        </Binding>
+                    </Label.Text>
+
+                    <!-- Gesture recognizer to edit duration -->
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditDurationCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <!-- "Click to edit duration" Text -->
+                <Label Text="(Click to edit duration)"
+                       FontSize="12"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       TextColor="Gray" />
+            </StackLayout>
+
+
+            <!-- Reminder Note Input -->
             <Editor Text="{Binding EditedReminderNote}"
                     Placeholder="Enter a custom reminder note"
-                    HeightRequest="100" />
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Center"
-                         Spacing="20">
-                <Button Command="{Binding TogglePauseCommand}">
-                    <Button.Triggers>
-                        <!-- Show Pause icon if running -->
-                        <DataTrigger TargetType="Button"
-                                     Binding="{Binding Timer.IsRunning}"
-                                     Value="true">
-                            <Setter Property="Text"
-                                    Value="Pause" />
-                        </DataTrigger>
-                        <!-- Show Play icon if paused -->
-                        <DataTrigger TargetType="Button"
-                                     Binding="{Binding Timer.IsRunning}"
-                                     Value="false">
-                            <Setter Property="Text"
-                                    Value="Play" />
-                        </DataTrigger>
-                    </Button.Triggers>
-                </Button>
+                    HeightRequest="100"
+                    AutoSize="TextChanges" />
 
-                <Button Text="Restart"
-                        Command="{Binding RestartTimerCommand}" />
-
-                <Button Text="Save"
-                            Command="{Binding SaveChangesCommand}" />
-            </StackLayout>
+            <!-- Save Button -->
+            <Button Text="Save"
+                    Command="{Binding SaveChangesCommand}"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    Padding="15"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="End" />
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>

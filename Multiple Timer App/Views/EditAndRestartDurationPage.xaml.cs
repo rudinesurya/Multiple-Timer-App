@@ -2,9 +2,9 @@ using Multiple_Timer_App.ViewModels;
 
 namespace Multiple_Timer_App.Views;
 
-public partial class TimerDetailPage : ContentPage
+public partial class EditAndRestartDurationPage : ContentPage
 {
-    public TimerDetailPage(TimerDetailViewModel vm)
+    public EditAndRestartDurationPage(EditAndRestartDurationViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;

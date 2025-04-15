@@ -43,22 +43,22 @@ public partial class AddTimerViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async void OnAddTimer()
+    async Task AddTimer()
     {
-        TimeSpan selectedDuration = new TimeSpan(SelectedHour, SelectedMinute, SelectedSecond);
+        var duration = new TimeSpan(SelectedHour, SelectedMinute, SelectedSecond);
 
-        var timer = new CountdownTimer
+        var newTimer = new CountdownTimer
         {
             Title = Title,
-            Duration = selectedDuration,
-            RemainingTime = selectedDuration,
             ReminderNote = ReminderNote,
+            Duration = duration,
+            RemainingTime = duration,
             IsRunning = false
         };
 
-        timerService.AddTimer(timer);
-        timerService.StartTimer(timer);
+        timerService.AddTimer(newTimer);
+        timerService.StopTimer(newTimer);
 
-        await Shell.Current.GoToAsync(".."); // ✅ Go back one page
+        await Shell.Current.GoToAsync(".."); // go back
     }
 }

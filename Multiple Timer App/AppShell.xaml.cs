@@ -11,5 +11,6 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         Routing.RegisterRoute(nameof(AddTimerPage), typeof(AddTimerPage));
         Routing.RegisterRoute(nameof(TimerDetailPage), typeof(TimerDetailPage));
+        Routing.RegisterRoute(nameof(EditAndRestartDurationPage), typeof(EditAndRestartDurationPage));
     }
 }

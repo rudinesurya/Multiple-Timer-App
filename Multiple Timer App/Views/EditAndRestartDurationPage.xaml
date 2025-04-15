@@ -1,0 +1,18 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Multiple_Timer_App.Views.Controls"
+             x:Class="Multiple_Timer_App.Views.EditAndRestartDurationPage"
+             Title="Edit Duration">
+    <VerticalStackLayout Padding="20"
+                         Spacing="20">
+        <Label Text="Select New Duration"
+               FontAttributes="Bold"
+               FontSize="20"
+               HorizontalOptions="Center" />
+
+        <controls:DurationPickerView BindingContext="{Binding}" />
+
+        <Button Text="Save"
+                Command="{Binding SaveDurationCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
